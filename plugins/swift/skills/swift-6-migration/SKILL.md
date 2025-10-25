@@ -17,7 +17,7 @@ Expert guidance for migrating Swift codebases to Swift 6, including concurrency 
 
 ## Key Migration Topics
 
-Refer to [swift6-migration.md](swift6-migration.md) for detailed guidance on:
+Refer to [migration-guide.md](migration-guide.md) for detailed guidance on:
 - Complete concurrency checking
 - Data race safety patterns
 - Incremental adoption strategies
@@ -47,14 +47,14 @@ When helping with Swift 6 migration:
 
 1. **Read relevant Swift files** to understand the current implementation
 2. **Identify concurrency and data race issues** in the code
-3. **Reference swift6-migration.md** - a single file containing 25 bundled sections:
+3. **Reference migration-guide.md** - a single file containing 25 bundled sections:
    - Check the table of contents at the top to see all available sections
    - For common problems and solutions: Search for "FILE: Guide.docc/CommonProblems.md"
    - For Sendable conformance and data race patterns: Search for "FILE: Guide.docc/DataRaceSafety.md"
    - For incremental migration strategies: Search for "FILE: Guide.docc/IncrementalAdoption.md"
    - For Swift 6 mode enablement: Search for "FILE: Guide.docc/Swift6Mode.md"
    - For complete checking: Search for "FILE: Guide.docc/CompleteChecking.md"
-   - Use grep to find specific topics: `grep -n "pattern" swift6-migration.md`
+   - Use grep to find specific topics: `grep -n "pattern" migration-guide.md`
 4. **Propose incremental changes** following the patterns from the guide
 5. **Test changes** with appropriate compiler flags (see Commands section)
 6. **Explain the reasoning** behind each change to the user

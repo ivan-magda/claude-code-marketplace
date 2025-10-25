@@ -27,6 +27,13 @@ Complete guide to slash commands for controlling Claude Code behavior. Read this
 - Work with plugin commands
 - Use the SlashCommand tool programmatically
 
+**✨ [best-practices.md](best-practices.md)** - **Skill Authoring Best Practices**<br>
+Essential guide for writing effective Skills that Claude can discover and use successfully. Read this when you need to:
+- Learn core principles for Skill development
+- Structure Skills for optimal performance
+- Implement workflows and feedback loops
+- Test and iterate on Skills effectively
+
 ### Advanced Features
 
 **🎯 [skills.md](skills.md)** - **Agent Skills Guide**<br>
@@ -69,19 +76,22 @@ Guide for creating and managing plugin distribution systems. Read this when you 
 ## Getting Started
 
 **New to Claude Code plugins?** Start with:
-1. [plugins.md](plugins.md) - Plugin quickstart tutorial
-2. [settings.md](settings.md) - Plugin configuration
-3. [slash-commands.md](slash-commands.md) - Plugin commands
+1. [best-practices.md](best-practices.md) - Skill authoring fundamentals
+2. [plugins.md](plugins.md) - Plugin quickstart tutorial
+3. [settings.md](settings.md) - Plugin configuration
+4. [slash-commands.md](slash-commands.md) - Plugin commands
 
 **Want to develop plugins?** Read:
-1. [plugins.md](plugins.md) - Plugin development basics
-2. [plugins-reference.md](plugins-reference.md) - Technical specifications
-3. [plugin-marketplaces.md](plugin-marketplaces.md) - Distribution
+1. [best-practices.md](best-practices.md) - Essential authoring principles
+2. [plugins.md](plugins.md) - Plugin development basics
+3. [plugins-reference.md](plugins-reference.md) - Technical specifications
+4. [plugin-marketplaces.md](plugin-marketplaces.md) - Distribution
 
 **Need automation?** Check:
-1. [hooks.md](hooks.md) - Event-driven workflows
-2. [sub-agents.md](sub-agents.md) - Task delegation
-3. [plugin-marketplaces.md](plugin-marketplaces.md) - Team distribution
+1. [best-practices.md](best-practices.md) - Workflow and feedback loop patterns
+2. [hooks.md](hooks.md) - Event-driven workflows
+3. [sub-agents.md](sub-agents.md) - Task delegation
+4. [plugin-marketplaces.md](plugin-marketplaces.md) - Team distribution
 
 ## Contributing
 

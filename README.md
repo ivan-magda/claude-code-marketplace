@@ -67,27 +67,6 @@ For testing and development purposes:
    /plugin install swift@claude-code-marketplace
    ```
 
-## Repository Structure
-
-```
-.
-├── .claude-plugin/
-│   └── marketplace.json               # Marketplace definition
-├── plugins/
-│   └── swift/                         # Swift plugin
-│       ├── .claude-plugin/
-│       │   └── plugin.json            # Plugin manifest
-│       ├── skills/
-│       │   └── swift-6-migration/     # Swift 6 migration skill
-│       └── README.md                  # Plugin documentation
-├── .github/
-│   └── workflows/
-│       └── validate-plugins.yml       # CI/CD validation
-├── .gitignore
-├── LICENSE
-└── README.md
-```
-
 ## Usage
 
 After installing a plugin, its features automatically activate based on context. For example, the Swift 6 migration skill activates when working with Swift code migration tasks.

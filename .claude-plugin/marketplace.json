@@ -1,25 +1,25 @@
 {
-  "name": "my-team-plugin-marketplace",
+  "name": "claude-code-marketplace",
   "owner": {
-    "name": "Your Organization",
-    "email": "team@your-org.com"
+    "name": "Ivan Magda",
+    "email": "ivan.magda@outlook.com"
   },
   "metadata": {
-    "description": "A curated collection of Claude Code plugins for our team",
+    "description": "A curated collection of Claude Code plugins",
     "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "hello-world",
-      "description": "A simple example plugin demonstrating basic Claude Code plugin functionality",
+      "name": "swift",
+      "description": "Swift programming language utilities and migration tools for Claude Code",
       "version": "1.0.0",
       "author": {
-        "name": "Your Team"
+        "name": "Ivan Magda"
       },
-      "source": "./plugins/hello-world",
-      "category": "examples",
-      "tags": ["example", "tutorial", "getting-started"],
-      "keywords": ["example", "tutorial", "getting-started"]
+      "source": "./plugins/swift",
+      "category": "languages",
+      "tags": ["swift", "migration", "swift6", "concurrency"],
+      "keywords": ["swift", "migration", "swift6", "concurrency"]
     }
   ]
 }

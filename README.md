@@ -1,36 +1,71 @@
-# Claude Code Plugin Marketplace Template
+# Claude Code Plugin Marketplace
 
-A GitHub template repository for creating and managing your own Claude Code plugin marketplace.
+A curated collection of Claude Code plugins maintained by Ivan Magda.
 
-## Quick Start
+## Overview
 
-### Use as Template
+This marketplace provides high-quality plugins that extend Claude Code's capabilities with specialized tools and skills for software development. All plugins follow best practices and are validated through automated CI/CD workflows.
 
-1. Click "Use this template" button on GitHub
-2. Create your new repository
-3. Clone your new repository:
-   ```bash
-   git clone https://github.com/your-org/your-marketplace-name.git
-   cd your-marketplace-name
+## Available Plugins
+
+### Swift Plugin
+
+Swift programming language utilities and migration tools for Claude Code.
+
+**Features:**
+- Swift 6 migration guidance with concurrency adoption
+- Data race safety detection and fixes
+- Sendable conformance support
+- Complete checking mode implementation
+- Incremental migration strategies
+
+**Version:** 1.0.0
+
+[View Swift Plugin Documentation](plugins/swift/README.md)
+
+## Installation
+
+### Prerequisites
+
+- Claude Code installed and configured
+- Git (for GitHub-based installation)
+
+### Install from GitHub
+
+1. Add this marketplace to Claude Code:
    ```
-4. Customize the marketplace:
-   ```bash
-   # Update marketplace metadata
-   vim .claude-plugin/marketplace.json
+   /plugin marketplace add ivan-magda/claude-code-marketplace
    ```
-5. Test locally (see [Testing](#testing) section)
 
-## What's Included
+2. Install the Swift plugin:
+   ```
+   /plugin install swift@claude-code-marketplace
+   ```
 
-This template provides:
+3. Verify installation:
+   ```
+   /plugin list
+   ```
 
-- **Marketplace Configuration** (`.claude-plugin/marketplace.json`): Central registry for all plugins following the official schema
-- **Sample Plugin** (`hello-world`): Fully functional example demonstrating:
-  - Proper plugin manifest structure
-  - Command with frontmatter
-  - Best practices and documentation
-- **GitHub Actions**: Automated plugin validation workflow
-- **Complete Documentation**: Links to official Claude Code documentation
+### Local Development
+
+For testing and development purposes:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ivan-magda/claude-code-marketplace.git
+   cd claude-code-marketplace
+   ```
+
+2. Add the local marketplace:
+   ```
+   /plugin marketplace add ./
+   ```
+
+3. Install plugins:
+   ```
+   /plugin install swift@claude-code-marketplace
+   ```
 
 ## Repository Structure
 
@@ -39,11 +74,11 @@ This template provides:
 ├── .claude-plugin/
 │   └── marketplace.json               # Marketplace definition
 ├── plugins/
-│   └── hello-world/                   # Example: Basic plugin
+│   └── swift/                         # Swift plugin
 │       ├── .claude-plugin/
 │       │   └── plugin.json            # Plugin manifest
-│       ├── commands/
-│       │   └── hello.md               # Command definition
+│       ├── skills/
+│       │   └── swift-6-migration/     # Swift 6 migration skill
 │       └── README.md                  # Plugin documentation
 ├── .github/
 │   └── workflows/
@@ -53,201 +88,26 @@ This template provides:
 └── README.md
 ```
 
-## Configuration
+## Usage
 
-### Marketplace Configuration
+After installing a plugin, its features automatically activate based on context. For example, the Swift 6 migration skill activates when working with Swift code migration tasks.
 
-Edit `.claude-plugin/marketplace.json` to customize your marketplace:
+### Swift Plugin Example
 
-```json
-{
-  "name": "my-team-plugin-marketplace",
-  "owner": {
-    "name": "Your Organization",
-    "email": "team@your-org.com"
-  },
-  "metadata": {
-    "description": "A curated collection of plugins for our team",
-    "version": "1.0.0"
-  },
-  "plugins": [
-    // Add your plugins here
-  ]
-}
+```
+Help me migrate this Swift code to Swift 6
 ```
 
-**Note**: The `name` field should use kebab-case (lowercase with hyphens). See the [Plugin Marketplaces documentation](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces#marketplace-schema) for complete schema details.
+or
 
-### Team Settings (Optional)
-
-You can configure automatic marketplace installation for team projects by adding `.claude/settings.json`:
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "team-tools": {
-      "source": {
-        "source": "github",
-        "repo": "your-org/your-marketplace-name"
-      }
-    }
-  }
-}
 ```
-
-When team members trust the repository folder, Claude Code automatically installs these marketplaces. See [Configure team marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces#configure-team-marketplaces) for details.
-
-## Testing
-
-### Local Testing
-
-1. **Navigate to your project directory**:
-   ```bash
-   cd your-marketplace-name
-   ```
-
-2. **Start Claude Code**:
-   ```bash
-   claude
-   ```
-
-3. **Add your local marketplace**:
-   ```
-   /plugin marketplace add ./path-to-your-marketplace
-   ```
-
-4. **Install a plugin**:
-   ```
-   /plugin install hello-world@marketplace-name
-   ```
-
-5. **Test commands**:
-   ```
-   /hello World
-   ```
-
-6. **Verify installation**:
-   ```
-   /help
-   ```
-   Your plugin commands should appear in the help list.
-
-### Using the Marketplace from GitHub
-
-Once published to GitHub, users can add your marketplace:
-
-```bash
-# Add marketplace from GitHub
-/plugin marketplace add your-org/your-repo-name
-
-# Install plugins
-/plugin install plugin-name@your-marketplace-name
+Can you check this code for Swift 6 concurrency issues?
 ```
-
-### CI/CD Testing
-
-The included GitHub Actions workflow validates:
-- JSON syntax in all plugin.json and marketplace.json files
-- Required fields are present
-- Command files exist
-- No duplicate plugin names
-
-## Creating New Plugins
-
-### Step 1: Create Plugin Structure
-
-```bash
-# Create plugin directory
-mkdir -p plugins/my-plugin/.claude-plugin
-mkdir -p plugins/my-plugin/commands
-
-# Create plugin metadata
-touch plugins/my-plugin/.claude-plugin/plugin.json
-touch plugins/my-plugin/README.md
-```
-
-### Step 2: Define Plugin Metadata
-
-Edit `plugins/my-plugin/.claude-plugin/plugin.json`:
-
-```json
-{
-  "name": "my-plugin",
-  "version": "1.0.0",
-  "description": "Description of what your plugin does",
-  "author": {
-    "name": "Your Name",
-    "email": "your-email@example.com",
-    "url": "https://github.com/your-username"
-  },
-  "homepage": "https://github.com/your-org/your-marketplace-name",
-  "repository": "https://github.com/your-org/your-marketplace-name",
-  "license": "MIT",
-  "keywords": ["keyword1", "keyword2"]
-}
-```
-
-**Note**: The `author` field must be an object with `name`, `email`, and optionally `url`. See the [Plugins Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference#plugin-manifest-schema) for complete schema details.
-
-### Step 3: Create Command
-
-Create `plugins/my-plugin/commands/my-command.md`:
-
-```markdown
----
-description: Brief description of what the command does
-argument-hint: [arg1] [arg2]
----
-
-# My Command
-
-[Detailed instructions for Claude on how to execute this command]
-
-## Instructions
-
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-[Additional context and guidelines]
-```
-
-**Note**: Commands should include frontmatter with `description` and optionally `argument-hint`. The content is a prompt that Claude executes. See the [Slash Commands documentation](https://docs.claude.com/en/docs/claude-code/slash-commands#plugin-commands) for details.
-
-### Step 4: Register in Marketplace
-
-Add to `.claude-plugin/marketplace.json`:
-
-```json
-{
-  "plugins": [
-    {
-      "name": "my-plugin",
-      "description": "Description of what your plugin does",
-      "version": "1.0.0",
-      "author": {
-        "name": "Your Name"
-      },
-      "source": "./plugins/my-plugin",
-      "category": "utilities",
-      "tags": ["tag1", "tag2"],
-      "keywords": ["keyword1", "keyword2"]
-    }
-  ]
-}
-```
-
-**Note**: The marketplace plugin entry uses the same schema as `plugin.json` with all fields optional, plus marketplace-specific fields like `source`, `category`, and `tags`. The `author` field should be an object.
-
-## Documentation
-
-### Official Claude Code Documentation
-
-- **[Claude Code Plugins](https://docs.claude.com/en/docs/claude-code/plugins)**: Complete plugin development guide
-- **[Plugin Marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)**: Marketplace creation and management
-- **[Plugins Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)**: Technical specifications and schemas
-- **[Slash Commands](https://docs.claude.com/en/docs/claude-code/slash-commands)**: Command development details
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+Built for the Claude Code ecosystem. Special thanks to the Anthropic team for creating an extensible and powerful AI coding assistant.

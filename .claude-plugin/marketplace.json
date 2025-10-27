@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "A curated collection of Claude Code plugins",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
       "name": "swift",
       "description": "Swift programming language utilities and migration tools for Claude Code",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Ivan Magda"
       },

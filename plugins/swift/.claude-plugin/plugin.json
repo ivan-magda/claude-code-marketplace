@@ -1,7 +1,7 @@
 {
   "name": "swift",
   "version": "1.0.0",
-  "description": "Swift programming language utilities and migration tools",
+  "description": "Swift programming language utilities and migration tools for Claude Code",
   "author": {
     "name": "Ivan Magda",
     "email": "ivan.magda@outlook.com",

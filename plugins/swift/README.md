@@ -67,7 +67,7 @@ The plugin includes comprehensive Swift 6 migration documentation covering:
 
 ## Version
 
-Current version: 1.0.1
+Current version: 1.0.2
 
 ## Keywords
 

@@ -19,7 +19,7 @@ Swift programming language utilities and migration tools for Claude Code.
 - Complete checking mode implementation
 - Incremental migration strategies
 
-**Version:** 1.0.1
+**Version:** 1.0.2
 
 [View Swift Plugin Documentation](plugins/swift/README.md)
 

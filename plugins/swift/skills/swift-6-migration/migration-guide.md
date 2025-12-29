@@ -1,9 +1,3 @@
----
-description: Guide for migrating Swift code to Swift 6 with concurrency and strict checking
-globs: "**/*.swift"
-alwaysApply: false
----
-
 # Swift 6 Migration Guide - Table of Contents
 
 This file contains 25 bundled files from Apple's Swift Concurrency Migration Guide.

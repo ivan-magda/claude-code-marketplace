@@ -1,61 +1,96 @@
 ---
 name: swift-6-migration
-description: Guides Swift code migration to Swift 6, including concurrency adoption, data race safety, and strict checking. Fixes Sendable conformance issues, actor isolation problems, and enables complete checking mode. Use when migrating to Swift 6, enabling Swift 6 language mode, fixing concurrency warnings, resolving data race issues, or adopting async/await and actors.
+description: Use when encountering Swift 6 concurrency errors, Sendable conformance warnings, actor isolation issues, "global variable is not concurrency-safe" errors, or migrating codebases to Swift 6 language mode
 allowed-tools: Read, Edit, Grep, Glob, Bash
 ---
 
 # Swift 6 Migration
 
-Expert guidance for migrating Swift codebases to Swift 6, including concurrency adoption and strict checking.
+## Overview
 
-## Migration Approach
+Swift 6 enforces data race safety at compile time. Migration involves making implicit isolation explicit and ensuring all shared state is thread-safe through Sendable conformance, actor isolation, or explicit synchronization.
 
-1. **Assess Current State**: Review Swift compiler version and current language mode
-2. **Incremental Strategy**: Enable warnings first, then gradually fix issues
-3. **Focus Areas**: Prioritize data race safety, actor isolation, and Sendable conformance
-4. **Testing**: Verify runtime behavior after changes
+## When to Use
 
-## Key Migration Topics
+**Symptoms that trigger this skill:**
+- Compiler error: `global variable 'X' is not concurrency-safe`
+- Compiler error: `cannot pass argument of non-sendable type`
+- Compiler error: `actor-isolated property cannot be referenced from non-isolated context`
+- Warning: `reference to var 'X' is not concurrency-safe`
+- Warning: `type 'X' does not conform to the 'Sendable' protocol`
+- Need to enable `-strict-concurrency=complete` or Swift 6 mode
+- Migrating from GCD/DispatchQueue to async/await
 
-Refer to [migration-guide.md](migration-guide.md) for detailed guidance on:
-- Complete concurrency checking
-- Data race safety patterns
-- Incremental adoption strategies
-- Common problems and solutions
-- Library evolution considerations
-- Swift 6 mode enablement
+**When NOT to use:**
+- General Swift syntax questions (not concurrency-related)
+- iOS/macOS API usage unrelated to concurrency
+- Performance optimization without concurrency issues
+
+## Quick Reference
+
+| Problem | Solution |
+|---------|----------|
+| Mutable global var | Use `let`, isolate to `@MainActor`, or wrap in actor |
+| Non-Sendable class | Add `Sendable` + `@unchecked Sendable`, or make an actor |
+| Actor isolation error | Add `await`, use `nonisolated`, or annotate with `@MainActor` |
+| Closure capturing non-Sendable | Use `@Sendable` closure, capture explicitly, or restructure |
+| Legacy callback API | Wrap with `withCheckedContinuation` or `withCheckedThrowingContinuation` |
+| Third-party non-Sendable types | Use `@preconcurrency import` as temporary workaround |
 
 ## Commands
 
-Use these commands during migration:
-
 ```bash
-# Check Swift compiler version
+# Check Swift version
 swift --version
 
-# Build with Swift 6 warnings
-swift build -Xswiftc -swift-version -Xswiftc 6
+# Build with complete concurrency checking (warnings)
+swift build -Xswiftc -strict-concurrency=complete
 
-# Enable complete checking
-# Add to Package.swift or build settings:
-# .enableUpcomingFeature("StrictConcurrency")
+# Build in Swift 6 mode (errors)
+swift build -Xswiftc -swift-version -Xswiftc 6
 ```
 
-## Instructions
+**Package.swift settings:**
+```swift
+// Enable strict concurrency per target
+.target(
+    name: "MyTarget",
+    swiftSettings: [.enableExperimentalFeature("StrictConcurrency")]
+)
 
-When helping with Swift 6 migration:
+// Or enable Swift 6 mode
+swiftLanguageVersions: [.v6]
+```
 
-1. **Read relevant Swift files** to understand the current implementation
-2. **Identify concurrency and data race issues** in the code
-3. **Reference migration-guide.md** - a single file containing 25 bundled sections:
-   - Check the table of contents at the top to see all available sections
-   - For common problems and solutions: Search for "FILE: Guide.docc/CommonProblems.md"
-   - For Sendable conformance and data race patterns: Search for "FILE: Guide.docc/DataRaceSafety.md"
-   - For incremental migration strategies: Search for "FILE: Guide.docc/IncrementalAdoption.md"
-   - For Swift 6 mode enablement: Search for "FILE: Guide.docc/Swift6Mode.md"
-   - For complete checking: Search for "FILE: Guide.docc/CompleteChecking.md"
-   - Use grep to find specific topics: `grep -n "pattern" migration-guide.md`
-4. **Propose incremental changes** following the patterns from the guide
-5. **Test changes** with appropriate compiler flags (see Commands section)
-6. **Explain the reasoning** behind each change to the user
+## Migration Strategy
 
+1. **Enable warnings first** - Use `-strict-concurrency=complete` before Swift 6 mode
+2. **Fix from leaves inward** - Start with types that have no dependencies, work up
+3. **Group related fixes** - Sendable conformance often cascades through a module
+4. **Test runtime behavior** - Some changes affect execution order
+
+## Common Mistakes
+
+| Mistake | Why It's Wrong | Better Approach |
+|---------|----------------|-----------------|
+| Adding `@unchecked Sendable` everywhere | Hides real data races | Analyze actual thread safety first |
+| Using `nonisolated(unsafe)` without synchronization | Compiler trusts you but runtime doesn't | Only use with actual locks/queues protecting access |
+| Wrapping everything in `Task { }` | Creates unnecessary concurrency | Use `await` at natural boundaries |
+| Making all classes actors | Actors have overhead and change semantics | Use actors for shared mutable state only |
+| Ignoring `@preconcurrency` warnings | Technical debt accumulates | Plan to address underlying issues |
+
+## Reference Documentation
+
+The [migration-guide.md](migration-guide.md) file contains Apple's complete migration documentation (25 bundled files). Key sections:
+
+| Topic | Search Pattern |
+|-------|----------------|
+| Common errors | `FILE: Guide.docc/CommonProblems.md` |
+| Data race safety | `FILE: Guide.docc/DataRaceSafety.md` |
+| Incremental adoption | `FILE: Guide.docc/IncrementalAdoption.md` |
+| Swift 6 mode | `FILE: Guide.docc/Swift6Mode.md` |
+| Complete checking | `FILE: Guide.docc/CompleteChecking.md` |
+| Sendable examples | `FILE: Sources/Examples/ConformanceMismatches.swift` |
+| Global variable patterns | `FILE: Sources/Examples/Globals.swift` |
+
+Use grep to find specific content: `grep -n "pattern" migration-guide.md`

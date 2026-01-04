@@ -2,6 +2,11 @@
 
 A personally curated collection of Claude Code plugins, skills, and development tools. This repository extends Claude Code with specialized capabilities for Swift development, code migration, and AI-assisted workflows.
 
+[![GitHub stars](https://img.shields.io/github/stars/ivan-magda/claude-code-marketplace?style=social)](https://github.com/ivan-magda/claude-code-marketplace/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/ivan-magda/claude-code-marketplace?style=social)](https://github.com/ivan-magda/claude-code-marketplace/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Validate Plugins](https://github.com/ivan-magda/claude-code-marketplace/actions/workflows/validate-plugins.yml/badge.svg)](https://github.com/ivan-magda/claude-code-marketplace/actions/workflows/validate-plugins.yml)
+
 ## What This Repository Provides
 
 This is not a community marketplace — it's a focused, maintained collection of plugins I use and develop for my own Claude Code workflows. Each plugin is validated through automated CI/CD and follows Claude Code plugin best practices.

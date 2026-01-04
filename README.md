@@ -1,92 +1,161 @@
 # Claude Code Plugin Marketplace
 
-A curated collection of Claude Code plugins maintained by Ivan Magda.
+A personally curated collection of Claude Code plugins, skills, and development tools. This repository extends Claude Code with specialized capabilities for Swift development, code migration, and AI-assisted workflows.
 
-## Overview
+## What This Repository Provides
 
-This marketplace provides high-quality plugins that extend Claude Code's capabilities with specialized tools and skills for software development. All plugins follow best practices and are validated through automated CI/CD workflows.
+This is not a community marketplace — it's a focused, maintained collection of plugins I use and develop for my own Claude Code workflows. Each plugin is validated through automated CI/CD and follows Claude Code plugin best practices.
+
+**Current focus areas:**
+
+- Swift 6 migration and concurrency tools
+- Code modernization workflows
+- Developer productivity skills
 
 ## Available Plugins
 
 ### Swift Plugin
 
-Swift programming language utilities and migration tools for Claude Code.
+Comprehensive Swift programming utilities for Claude Code, specializing in Swift 6 migration and concurrency adoption.
 
-**Features:**
-- Swift 6 migration guidance with concurrency adoption
-- Data race safety detection and fixes
-- Sendable conformance support
-- Complete checking mode implementation
-- Incremental migration strategies
+**Capabilities:**
+
+- Swift 6 migration guidance with step-by-step concurrency adoption
+- Data race safety detection and automated fix suggestions
+- Sendable conformance analysis and implementation support
+- Complete concurrency checking mode configuration
+- Incremental migration strategies for large codebases
+
+**Triggers automatically when:**
+
+- Migrating Swift code to Swift 6
+- Fixing data race safety issues
+- Adopting async/await and actors
+- Resolving Sendable conformance warnings
 
 **Version:** 1.0.2
 
-[View Swift Plugin Documentation](plugins/swift/README.md)
+**Documentation:** [Swift Plugin Details](plugins/swift/README.md)
 
 ## Installation
 
 ### Prerequisites
 
 - Claude Code installed and configured
-- Git (for GitHub-based installation)
+- Git for repository access
 
-### Install from GitHub
+### Quick Start
 
-1. Add this marketplace to Claude Code:
-   ```
-   /plugin marketplace add ivan-magda/claude-code-marketplace
-   ```
+Add this plugin collection to Claude Code:
 
-2. Install the Swift plugin:
-   ```
-   /plugin install swift@claude-code-marketplace
-   ```
+```
+/plugin marketplace add ivan-magda/claude-code-marketplace
+```
 
-3. Verify installation:
-   ```
-   /plugin list
-   ```
+Install the Swift plugin:
 
-### Local Development
+```
+/plugin install swift@claude-code-marketplace
+```
 
-For testing and development purposes:
+Verify installation:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ivan-magda/claude-code-marketplace.git
-   cd claude-code-marketplace
-   ```
+```
+/plugin list
+```
 
-2. Add the local marketplace:
-   ```
-   /plugin marketplace add ./
-   ```
+### Local Development Setup
 
-3. Install plugins:
-   ```
-   /plugin install swift@claude-code-marketplace
-   ```
+Clone and test locally:
 
-## Usage
+```bash
+git clone https://github.com/ivan-magda/claude-code-marketplace.git
+cd claude-code-marketplace
+```
 
-After installing a plugin, its features automatically activate based on context. For example, the Swift 6 migration skill activates when working with Swift code migration tasks.
+Add as local marketplace:
 
-### Swift Plugin Example
+```
+/plugin marketplace add ./
+```
+
+Install from local source:
+
+```
+/plugin install swift@claude-code-marketplace
+```
+
+## Usage Examples
+
+Plugins activate automatically based on context. The Swift 6 migration skill engages when Claude Code detects relevant tasks.
+
+**Swift migration prompts:**
 
 ```
 Help me migrate this Swift code to Swift 6
 ```
 
-or
+```
+Check this code for Swift 6 concurrency issues
+```
 
 ```
-Can you check this code for Swift 6 concurrency issues?
+Fix the Sendable conformance warnings in this file
 ```
+
+```
+Enable strict concurrency checking for this target
+```
+
+## Repository Structure
+
+```
+claude-code-marketplace/
+├── .claude-plugin/
+│   └── marketplace.json      # Plugin registry
+├── plugins/
+│   └── swift/
+│       ├── .claude-plugin/
+│       │   └── plugin.json   # Plugin metadata
+│       ├── skills/
+│       │   └── swift-6-migration/
+│       │       ├── SKILL.md          # Skill definition
+│       │       └── migration-guide.md # Reference docs
+│       └── README.md
+└── .github/
+    └── workflows/
+        └── validate-plugins.yml      # CI validation
+```
+
+## Validation
+
+All plugins are validated on every push and pull request:
+
+- JSON schema validation for plugin manifests
+- Required field verification
+- Duplicate name detection
+
+## Roadmap
+
+Planned additions to this collection:
+
+- Additional Swift development skills
+- iOS/macOS development workflows
+- Code review assistance tools
+
+## Related Resources
+
+- [Claude Code Plugin Template](https://github.com/ivan-magda/claude-code-plugin-template) — Starter template for creating your own plugins
+- [Apple Swift Migration Guide](https://www.swift.org/migration/documentation/migrationguide/) — Official Swift 6 migration documentation
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
-Built for the Claude Code ecosystem. Special thanks to the Anthropic team for creating an extensible and powerful AI coding assistant.
+Built for [Claude Code](https://claude.com/claude-code) by [Anthropic](https://www.anthropic.com/).
+
+## Author
+
+Maintained by [Ivan Magda](https://github.com/ivan-magda). Contributions and feedback welcome via issues.

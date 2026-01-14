@@ -9,10 +9,10 @@ description: Use when releasing a new plugin version, bumping versions, creating
 
 **`metadata.version` ≠ plugin version.** These are DIFFERENT things:
 
-| Field | What It Tracks | When to Update |
-|-------|----------------|----------------|
-| `plugins[].version` | Individual plugin version | Every plugin release |
-| `metadata.version` | Marketplace catalog structure | Adding/removing plugins ONLY |
+| Field               | What It Tracks                | When to Update               |
+| ------------------- | ----------------------------- | ---------------------------- |
+| `plugins[].version` | Individual plugin version     | Every plugin release         |
+| `metadata.version`  | Marketplace catalog structure | Adding/removing plugins ONLY |
 
 **Common mistake:** Thinking metadata.version should "stay in sync" with plugin versions. It should NOT.
 
@@ -53,6 +53,7 @@ gh release create v1.3.0 --title "v1.3.0" --notes "## Changes
 ## Tag Format
 
 Use `v1.3.0`, NOT `swift-v1.3.0`. Check existing tags:
+
 ```bash
 git tag --sort=-v:refname | head -5
 ```

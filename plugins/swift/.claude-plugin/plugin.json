@@ -5,10 +5,10 @@
   "author": {
     "name": "Ivan Magda",
     "email": "ivan.magda@outlook.com",
-    "url": "https://github.com/ivan-magda/claude-code-marketplace"
+    "url": "https://github.com/ivan-magda/claude-superpowers"
   },
-  "homepage": "https://github.com/ivan-magda/claude-code-marketplace",
-  "repository": "https://github.com/ivan-magda/claude-code-marketplace",
+  "homepage": "https://github.com/ivan-magda/claude-superpowers",
+  "repository": "https://github.com/ivan-magda/claude-superpowers",
   "license": "MIT",
   "keywords": ["swift", "ios"]
 }

@@ -1,11 +1,11 @@
-# Claude Code Plugin Marketplace
+# Claude Superpowers
 
 A personally curated collection of Claude Code plugins, skills, and development tools. This repository extends Claude Code with specialized capabilities for Swift development, code migration, and AI-assisted workflows.
 
-[![GitHub stars](https://img.shields.io/github/stars/ivan-magda/claude-code-marketplace?style=social)](https://github.com/ivan-magda/claude-code-marketplace/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/ivan-magda/claude-code-marketplace?style=social)](https://github.com/ivan-magda/claude-code-marketplace/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/ivan-magda/claude-superpowers?style=social)](https://github.com/ivan-magda/claude-superpowers/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/ivan-magda/claude-superpowers?style=social)](https://github.com/ivan-magda/claude-superpowers/network/members)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Validate Plugins](https://github.com/ivan-magda/claude-code-marketplace/actions/workflows/validate-plugins.yml/badge.svg)](https://github.com/ivan-magda/claude-code-marketplace/actions/workflows/validate-plugins.yml)
+[![Validate Plugins](https://github.com/ivan-magda/claude-superpowers/actions/workflows/validate-plugins.yml/badge.svg)](https://github.com/ivan-magda/claude-superpowers/actions/workflows/validate-plugins.yml)
 
 ## What This Repository Provides
 
@@ -54,13 +54,13 @@ Comprehensive Swift programming utilities for Claude Code, specializing in Swift
 Add this plugin collection to Claude Code:
 
 ```
-/plugin marketplace add ivan-magda/claude-code-marketplace
+/plugin marketplace add ivan-magda/claude-superpowers
 ```
 
 Install the Swift plugin:
 
 ```
-/plugin install swift@claude-code-marketplace
+/plugin install swift@claude-superpowers
 ```
 
 Verify installation:
@@ -74,8 +74,8 @@ Verify installation:
 Clone and test locally:
 
 ```bash
-git clone https://github.com/ivan-magda/claude-code-marketplace.git
-cd claude-code-marketplace
+git clone https://github.com/ivan-magda/claude-superpowers.git
+cd claude-superpowers
 ```
 
 Add as local marketplace:
@@ -87,7 +87,7 @@ Add as local marketplace:
 Install from local source:
 
 ```
-/plugin install swift@claude-code-marketplace
+/plugin install swift@claude-superpowers
 ```
 
 ## Usage Examples
@@ -115,7 +115,7 @@ Enable strict concurrency checking for this target
 ## Repository Structure
 
 ```
-claude-code-marketplace/
+claude-superpowers/
 ├── .claude-plugin/
 │   └── marketplace.json      # Plugin registry
 ├── plugins/

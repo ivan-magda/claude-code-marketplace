@@ -78,51 +78,39 @@ Record and optimize demo GIFs for Swift package READMEs.
 
 ## Installation
 
-### Local Testing
+```
+/plugin marketplace add ivan-magda/claude-superpowers
+/plugin install swift@claude-superpowers
+```
 
-1. Add the local marketplace:
+## Usage
 
-   ```
-   /plugin marketplace add ./plugins
-   ```
+Skills activate automatically based on context. Example prompts:
 
-2. Install the Swift plugin:
-
-   ```
-   /plugin install swift@local-plugins
-   ```
-
-3. Restart Claude Code
-
-### Using the Plugin
-
-Once installed, the Swift 6 migration skill will automatically activate when you're working with Swift code migration tasks. You can also explicitly ask Claude to use it:
+**Swift 6 Migration:**
 
 ```
 Help me migrate this Swift code to Swift 6
 ```
 
-or
+**DocC Comments:**
 
 ```
-Can you check this code for Swift 6 concurrency issues?
+Add documentation comments to this Swift file
 ```
 
-## Documentation
+**DocC GitHub Pages:**
 
-The plugin includes comprehensive Swift 6 migration documentation covering:
+```
+Set up DocC documentation for this Swift package with GitHub Pages
+```
 
-- Complete concurrency checking
-- Data race safety patterns
-- Incremental adoption strategies
-- Common problems and solutions
-- Library evolution considerations
-- Swift 6 mode enablement
+**Demo Recording:**
+
+```
+Create a demo GIF for this Swift package README
+```
 
 ## Version
 
-Current version: 1.0.2
-
-## Keywords
-
-swift, migration, swift6, concurrency, docc, documentation, demo
+1.0.2

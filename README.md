@@ -11,7 +11,7 @@ A personally curated collection of Claude Code plugins, skills, and development 
 
 | Plugin                           | Description                                           | Version |
 | -------------------------------- | ----------------------------------------------------- | ------- |
-| [swift](plugins/swift/README.md) | Swift 6 migration, DocC documentation, demo recording | 1.0.2   |
+| [swift](plugins/swift/README.md) | Swift 6 migration, DocC documentation, demo recording | 1.1.0   |
 
 ## Installation
 

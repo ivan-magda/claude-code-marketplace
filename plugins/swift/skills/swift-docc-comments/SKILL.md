@@ -1,7 +1,7 @@
 ---
 name: swift-docc-comments
 description: Use when writing or enhancing Swift documentation comments for DocC generation, adding inline doc comments to Swift source files, or when user asks for API documentation
-allowed-tools: Read, Edit, Grep, Glob
+allowed-tools: Read, Grep, Glob
 ---
 
 # Swift DocC Inline Comments

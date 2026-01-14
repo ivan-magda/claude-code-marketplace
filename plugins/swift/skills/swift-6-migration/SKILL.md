@@ -1,7 +1,7 @@
 ---
 name: swift-6-migration
 description: Use when encountering Swift 6 concurrency errors, Sendable conformance warnings, actor isolation issues, "global variable is not concurrency-safe" errors, or migrating codebases to Swift 6 language mode
-allowed-tools: Read, Edit, Grep, Glob, Bash
+allowed-tools: Read, Grep, Glob
 ---
 
 # Swift 6 Migration

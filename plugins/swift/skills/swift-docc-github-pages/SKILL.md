@@ -1,7 +1,7 @@
 ---
 name: swift-docc-github-pages
 description: Use when setting up DocC documentation for a Swift package, deploying to GitHub Pages, or encountering "no such module 'UIKit'" during doc generation
-allowed-tools: Read, Write, Bash, Grep, Glob
+allowed-tools: Read, Grep, Glob
 ---
 
 # Swift DocC to GitHub Pages

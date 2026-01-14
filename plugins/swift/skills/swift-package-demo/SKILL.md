@@ -1,7 +1,7 @@
 ---
 name: swift-package-demo
 description: Use when creating demo GIFs for Swift package READMEs, recording iOS simulator videos, or setting up demo apps for SwiftUI libraries
-allowed-tools: Read, Write, Bash, Grep, Glob, AskUserQuestion
+allowed-tools: Read, Grep, Glob, AskUserQuestion
 ---
 
 # Swift Package Demo Recording

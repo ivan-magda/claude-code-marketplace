@@ -113,4 +113,4 @@ Create a demo GIF for this Swift package README
 
 ## Version
 
-1.2.0
+1.3.0

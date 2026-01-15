@@ -1,6 +1,6 @@
 {
   "name": "swift",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Swift programming language utilities and migration tools for Claude Code",
   "author": {
     "name": "Ivan Magda",

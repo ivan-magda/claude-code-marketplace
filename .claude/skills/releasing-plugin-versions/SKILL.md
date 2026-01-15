@@ -16,13 +16,14 @@ description: Use when releasing a new plugin version, bumping versions, creating
 
 **Common mistake:** Thinking metadata.version should "stay in sync" with plugin versions. It should NOT.
 
-## Plugin Version Locations (Update ALL 3)
+## Plugin Version Locations (Update ALL 4)
 
 When releasing a plugin (e.g., swift 1.2.0 → 1.3.0):
 
 1. `plugins/swift/.claude-plugin/plugin.json` → `"version": "1.3.0"`
 2. `.claude-plugin/marketplace.json` → `plugins[].version: "1.3.0"`
 3. `plugins/swift/README.md` → Version section: `1.3.0`
+4. `README.md` (root) → Available Plugins table: `1.3.0`
 
 ## Release Commands
 

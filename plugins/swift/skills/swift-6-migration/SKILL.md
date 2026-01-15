@@ -8,41 +8,77 @@ allowed-tools: Read, Grep, Glob
 
 ## Overview
 
-Swift 6 enforces data race safety at compile time. Migration involves making implicit isolation explicit and ensuring all shared state is thread-safe through Sendable conformance, actor isolation, or explicit synchronization.
+Swift 6 enforces data race safety at compile time. Migration involves making implicit isolation explicit and ensuring all shared state is thread-safe.
 
-## When to Use
+**This skill bundles Apple's complete migration guide.** You MUST search it for EVERY error before implementing a fix.
 
-**Symptoms that trigger this skill:**
-- Compiler error: `global variable 'X' is not concurrency-safe`
-- Compiler error: `cannot pass argument of non-sendable type`
-- Compiler error: `actor-isolated property cannot be referenced from non-isolated context`
-- Warning: `reference to var 'X' is not concurrency-safe`
-- Warning: `type 'X' does not conform to the 'Sendable' protocol`
-- Need to enable `-strict-concurrency=complete` or Swift 6 mode
-- Migrating from GCD/DispatchQueue to async/await
+## Mandatory Workflow
 
-**When NOT to use:**
-- General Swift syntax questions (not concurrency-related)
-- iOS/macOS API usage unrelated to concurrency
-- Performance optimization without concurrency issues
+```dot
+digraph migration_workflow {
+    rankdir=TB;
+    node [shape=box];
 
-## Quick Reference
+    "Compiler error/warning" [shape=ellipse];
+    "Search migration-guide.md" [label="REQUIRED: Search migration-guide.md\nfor error pattern"];
+    "Read matched section" [label="Read the matched FILE: section"];
+    "Apply documented fix" [label="Apply Apple's documented fix"];
+    "Verify fix" [label="Build and verify"];
 
-| Problem | Solution |
-|---------|----------|
-| Mutable global var | Use `let`, isolate to `@MainActor`, or wrap in actor |
-| Non-Sendable class | Add `Sendable` + `@unchecked Sendable`, or make an actor |
-| Actor isolation error | Add `await`, use `nonisolated`, or annotate with `@MainActor` |
-| Closure capturing non-Sendable | Use `@Sendable` closure, capture explicitly, or restructure |
-| Legacy callback API | Wrap with `withCheckedContinuation` or `withCheckedThrowingContinuation` |
-| Third-party non-Sendable types | Use `@preconcurrency import` as temporary workaround |
+    "Compiler error/warning" -> "Search migration-guide.md";
+    "Search migration-guide.md" -> "Read matched section";
+    "Read matched section" -> "Apply documented fix";
+    "Apply documented fix" -> "Verify fix";
+    "Verify fix" -> "Compiler error/warning" [label="More errors"];
+}
+```
+
+**For EACH compiler error/warning:**
+
+1. **FIRST** search migration-guide.md for the error pattern
+2. **THEN** read the matched FILE: section
+3. **THEN** apply the documented fix
+4. **FINALLY** verify the fix
+
+## Checklist
+
+Use TodoWrite to track each item:
+
+- [ ] Enable `-strict-concurrency=complete` warnings before Swift 6 mode
+- [ ] For EACH error: grep migration-guide.md BEFORE implementing fix
+- [ ] Read the relevant FILE: section from search results
+- [ ] Verify fix matches Apple's documented approach
+- [ ] Test runtime behavior after fixes (execution order may change)
+
+## Required Searches by Error Type
+
+**You MUST run these searches.** Do not skip to Quick Reference.
+
+| Error Pattern                               | Required Search Command                                    |
+| ------------------------------------------- | ---------------------------------------------------------- |
+| `global variable is not concurrency-safe`   | `grep -n -A 30 "Unsafe Global" migration-guide.md`         |
+| `does not conform to.*Sendable`             | `grep -n -A 30 "Sendable Types" migration-guide.md`        |
+| `cannot pass argument of non-sendable type` | `grep -n -A 30 "ConformanceMismatches" migration-guide.md` |
+| `actor-isolated.*cannot be referenced`      | `grep -n -A 30 "actor-isolated" migration-guide.md`        |
+| `@preconcurrency` needed                    | `grep -n -A 30 "PreconcurrencyImport" migration-guide.md`  |
+| `Task` or async/await migration             | `grep -n -A 30 "Boundaries.swift" migration-guide.md`      |
+| GCD/DispatchQueue migration                 | `grep -n -A 30 "DispatchQueue" migration-guide.md`         |
+
+## Quick Reference (Starting Points Only)
+
+**These are shortcuts for orientation. You MUST verify against migration-guide.md before applying.**
+
+| Problem               | Likely Direction                            | Verify With                                   |
+| --------------------- | ------------------------------------------- | --------------------------------------------- |
+| Mutable global var    | `let`, `@MainActor`, or actor               | `grep -n "Globals.swift" migration-guide.md`  |
+| Non-Sendable class    | `Sendable`, `@unchecked Sendable`, or actor | `grep -n "Sendable" migration-guide.md`       |
+| Actor isolation error | `await`, `nonisolated`, or `@MainActor`     | `grep -n "actor-isolated" migration-guide.md` |
+| Closure capturing     | `@Sendable` closure or restructure          | `grep -n "closure" migration-guide.md`        |
+| Legacy callback API   | `withCheckedContinuation`                   | `grep -n "continuation" migration-guide.md`   |
 
 ## Commands
 
 ```bash
-# Check Swift version
-swift --version
-
 # Build with complete concurrency checking (warnings)
 swift build -Xswiftc -strict-concurrency=complete
 
@@ -51,6 +87,7 @@ swift build -Xswiftc -swift-version -Xswiftc 6
 ```
 
 **Package.swift settings:**
+
 ```swift
 // Enable strict concurrency per target
 .target(
@@ -62,35 +99,38 @@ swift build -Xswiftc -swift-version -Xswiftc 6
 swiftLanguageVersions: [.v6]
 ```
 
-## Migration Strategy
-
-1. **Enable warnings first** - Use `-strict-concurrency=complete` before Swift 6 mode
-2. **Fix from leaves inward** - Start with types that have no dependencies, work up
-3. **Group related fixes** - Sendable conformance often cascades through a module
-4. **Test runtime behavior** - Some changes affect execution order
-
 ## Common Mistakes
 
-| Mistake | Why It's Wrong | Better Approach |
-|---------|----------------|-----------------|
-| Adding `@unchecked Sendable` everywhere | Hides real data races | Analyze actual thread safety first |
-| Using `nonisolated(unsafe)` without synchronization | Compiler trusts you but runtime doesn't | Only use with actual locks/queues protecting access |
-| Wrapping everything in `Task { }` | Creates unnecessary concurrency | Use `await` at natural boundaries |
-| Making all classes actors | Actors have overhead and change semantics | Use actors for shared mutable state only |
-| Ignoring `@preconcurrency` warnings | Technical debt accumulates | Plan to address underlying issues |
+| Mistake                                 | Why It's Wrong                          | Better Approach                                              |
+| --------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| Adding `@unchecked Sendable` everywhere | Hides real data races                   | Search guide first: `grep -n "unchecked" migration-guide.md` |
+| Using `nonisolated(unsafe)`             | Compiler trusts you but runtime doesn't | Search: `grep -n "nonisolated" migration-guide.md`           |
+| Skipping the migration guide            | Miss Apple's recommended patterns       | ALWAYS search before fixing                                  |
+
+## Red Flags - STOP and Search First
+
+These thoughts mean you're about to skip required verification:
+
+- "I know how to fix this"
+- "The Quick Reference has the answer"
+- "This is a common pattern"
+- "I'll check the guide if this doesn't work"
+- "My knowledge is sufficient"
+
+**All of these mean: Search migration-guide.md FIRST.**
 
 ## Reference Documentation
 
-The [migration-guide.md](migration-guide.md) file contains Apple's complete migration documentation (25 bundled files). Key sections:
+The migration-guide.md file contains Apple's complete migration documentation (25 bundled files, 3700+ lines):
 
-| Topic | Search Pattern |
-|-------|----------------|
-| Common errors | `FILE: Guide.docc/CommonProblems.md` |
-| Data race safety | `FILE: Guide.docc/DataRaceSafety.md` |
-| Incremental adoption | `FILE: Guide.docc/IncrementalAdoption.md` |
-| Swift 6 mode | `FILE: Guide.docc/Swift6Mode.md` |
-| Complete checking | `FILE: Guide.docc/CompleteChecking.md` |
-| Sendable examples | `FILE: Sources/Examples/ConformanceMismatches.swift` |
-| Global variable patterns | `FILE: Sources/Examples/Globals.swift` |
+| Topic                    | Search Pattern                                       |
+| ------------------------ | ---------------------------------------------------- |
+| Common errors            | `FILE: Guide.docc/CommonProblems.md`                 |
+| Data race safety         | `FILE: Guide.docc/DataRaceSafety.md`                 |
+| Incremental adoption     | `FILE: Guide.docc/IncrementalAdoption.md`            |
+| Swift 6 mode             | `FILE: Guide.docc/Swift6Mode.md`                     |
+| Complete checking        | `FILE: Guide.docc/CompleteChecking.md`               |
+| Sendable examples        | `FILE: Sources/Examples/ConformanceMismatches.swift` |
+| Global variable patterns | `FILE: Sources/Examples/Globals.swift`               |
 
-Use grep to find specific content: `grep -n "pattern" migration-guide.md`
+To find specific content: `grep -n "pattern" migration-guide.md`

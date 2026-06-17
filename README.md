@@ -1,9 +1,9 @@
 # Claude Superpowers
 
-A personally curated marketplace of Claude Code plugins.
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Validate Plugins](https://github.com/ivan-magda/claude-superpowers/actions/workflows/validate-plugins.yml/badge.svg)](https://github.com/ivan-magda/claude-superpowers/actions/workflows/validate-plugins.yml)
+
+A personally curated marketplace of Claude Code plugins.
 
 ## Table of Contents
 
